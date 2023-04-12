@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width" >
+        <title>Encriptador de Texto</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+    </head>
+    <script>
+        function encriptar() {
+            
+            var texto = document.querySelector("#mensaje").value;
+            if(texto!=null && texto!=""){
+                document.querySelector("#mensaje").value="";
+                let result = texto.replaceAll("e","enter").replaceAll("i","imes")
+                .replaceAll("a", "ai").replaceAll("o","ober").replaceAll("u","ufat");
+                
+                displayScreen(result);
+            }else{
+                alert("Debes ingresar un texto");
+            }
+        }
+
+        function desencriptar() {
+
+            var texto = document.querySelector("#mensaje").value;
+            if(texto!=null && texto!=""){
+                document.querySelector("#mensaje").value="";
+                let result = texto.replaceAll("enter","e").replaceAll("imes","i")
+                .replaceAll("ai", "a").replaceAll("ober","o").replaceAll("ufat","u");
+
+                displayScreen(result);
+                
+            }else{
+                alert("Debes ingresar un texto");
+            }
+            
+        }
+
+        function displayScreen(result){
+
+            var p = document.querySelector("#texto-encriptado");
+                p.innerText = result;
+                p.style.display = "block";
+            document.querySelector("#div-textos-iniciales").style.display = "none";
+            document.querySelector("#copiar").style.display = "inline";
+
+        }
+
+        function copiar(){
+
+            var p = document.querySelector("#texto-encriptado");
+
+            navigator.clipboard.writeText(p.innerHTML)
+            .then(() => {
+                console.log('Texto copiado al portapapeles')
+            })
+            .catch(err => {
+                console.error('Error al copiar al portapapeles:', err)
+            });
+        }
+
+    </script>
+    <body>
+        <header>
+            <h1><img src="images/Logo.png" class="logo" alt="logo"></h1>
+        </header>
+        <main>
+            <section class="texto-insert">
+                <input type="text" id="mensaje" placeholder="ingrese el texto aqui">
+            </section>
+            <section class="botones">
+                <p>Sólo letras minúsculas y sin acentos</p>
+                <input type="button" value="Encriptar!" class="encriptar" id="btn-encriptar" onclick="encriptar()">
+                <input type="button" value="Desencriptar!" class="desencriptar" onclick="desencriptar()">
+            </section>
+            <section class="rectangle">
+                <p id="texto-encriptado"></p>
+                <div id="div-textos-iniciales">
+                    <img src="images/Muñeco.png" class="img-rect" alt="muneco-busqueda">
+                    <p id="mensaje-inical-rect"> Ningún Mensaje fue encontrado</p>
+                    <p id="mensaje-secundario-rect">Ingresa el texto que desees encriptar o desencriptar.</p>
+                </div>
+                <input type="button" value="Copiar" class="desencriptar" id="copiar" onclick="copiar()">
+            </section>
+        </main>
+        <footer>
+            <p>Developed by Alejandra Ruiz
+            </br>
+            Cali - Colombia
+            </br>
+            <a href="https://www.linkedin.com/in/alejaguz30/">LinkedIn</a>
+            </p>
+        </footer>
+    </body>
+</html>
